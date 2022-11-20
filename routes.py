@@ -18,6 +18,18 @@ def create():
     db.session.commit()
     return redirect("/")
 
+@app.route("/remove")
+def remove():
+    return render_template("remove.html")
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    name = request.form["name"]
+    sql = "DELETE FROM restaurants WHERE name=(:name)"
+    result = db.session.execute(sql, {"name":name})
+    db.session.commit()
+    return redirect("/")
+
 @app.route("/restaurants")
 def restaurants():
     sql = "SELECT name FROM restaurants"
