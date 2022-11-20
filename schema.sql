@@ -1,5 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE restaurants (
     id SERIAL PRIMARY KEY,
-    username TEXT UNIQUE,
-    password TEXT
+    name TEXT UNIQUE
 );

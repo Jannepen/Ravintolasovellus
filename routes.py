@@ -1,5 +1,6 @@
 from app import app
 from flask import redirect, render_template, request
+from db import db
 
 @app.route("/")
 def index():
@@ -7,4 +8,8 @@ def index():
 
 @app.route("/restaurants")
 def restaurants():
-    return render_template("restaurants.html")
+    sql = "SELECT name FROM restaurants"
+    result = db.session.execute(sql)
+    return render_template("restaurants.html", restaurants=result)
+
+

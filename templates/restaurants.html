@@ -1,1 +1,5 @@
-<b>Tässä on ravintoloita</b>
+<b>Ravintolat</b>
+{% for restaurant in restaurants %}
+<p>
+{{ restaurant[0] }}
+{% endfor %}
