@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, request
-import restaurants
+import restaurants, reviews
 
 @app.route("/")
 def index():
@@ -30,4 +30,18 @@ def delete():
 def restaurants_list():
     result = restaurants.get_list()
     return render_template("restaurants.html", restaurants=result)
+    
+@app.route("/review")
+def review():
+    return render_template("review.html")
+
+@app.route("/addreview", methods=["POST"])
+def addreview():
+    restaurant_name = request.form["name"]
+    restaurant_id = restaurants.get_id(restaurant_name)
+    grade = request.form["grade"]
+    message = request.form["message"]
+    reviews.add_review(grade, message, restaurant_id) 
+    restaurants.update_grade(restaurant_id)
+    return redirect("/")
 
