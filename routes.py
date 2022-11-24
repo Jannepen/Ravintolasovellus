@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, request
-from db import db
+import restaurants
 
 @app.route("/")
 def index():
@@ -13,9 +13,7 @@ def new():
 @app.route("/create", methods=["POST"])
 def create():
     name = request.form["name"]
-    sql = "INSERT INTO restaurants (name) VALUES (:name)"
-    result = db.session.execute(sql, {"name":name})
-    db.session.commit()
+    restaurants.add_restaurant(name)
     return redirect("/")
 
 @app.route("/remove")
@@ -25,14 +23,11 @@ def remove():
 @app.route("/delete", methods=["POST"])
 def delete():
     name = request.form["name"]
-    sql = "DELETE FROM restaurants WHERE name=(:name)"
-    result = db.session.execute(sql, {"name":name})
-    db.session.commit()
+    restaurants.delete_restaurant(name)
     return redirect("/")
 
 @app.route("/restaurants")
-def restaurants():
-    sql = "SELECT name FROM restaurants"
-    result = db.session.execute(sql)
+def restaurants_list():
+    result = restaurants.get_list()
     return render_template("restaurants.html", restaurants=result)
 
