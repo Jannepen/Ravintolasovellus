@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, request
-import restaurants, reviews
+import restaurants, reviews, users
 
 @app.route("/")
 def index():
@@ -44,4 +44,43 @@ def addreview():
     reviews.add_review(grade, message, restaurant_id) 
     restaurants.update_grade(restaurant_id)
     return redirect("/")
+    
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if users.login(username, password):
+            return render_template("loggedin.html", message=username)
+        else:
+            return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
+            
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password1 = request.form["password1"]
+        password2 = request.form["password2"]
+        if password1 != password2:
+            return render_template("error.html", message="Sanasalat eroavat, yritä uudelleen.")
+        if users.register(username, password1):
+            return render_template("registered.html")
+        else:
+            return render_template("error.html", message="Rekisteröinti epäonnistui.")
+    
+@app.route("/logout")
+def logout():
+    if users.user_id():
+        users.logout()
+    else:
+        return render_template("error.html", message="Et ole kirjautunut sisään.")
+    return render_template("logout.html")
+    
+    
+    
+    
 

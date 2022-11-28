@@ -12,3 +12,8 @@ CREATE TABLE reviews (
     sent_at TIMESTAMP
 );
 
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE,
+    password TEXT
+);
