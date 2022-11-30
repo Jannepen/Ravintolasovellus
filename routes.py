@@ -6,25 +6,23 @@ import restaurants, reviews, users
 def index():
     return render_template("welcome.html")
 
-@app.route("/new")
+@app.route("/new", methods=["GET", "POST"])
 def new():
-    return render_template("new.html")
+    if request.method == "GET":
+        return render_template("new.html")
+    if request.method == "POST":
+        name = request.form["name"]
+        restaurants.add_restaurant(name)
+        return redirect("/")
 
-@app.route("/create", methods=["POST"])
-def create():
-    name = request.form["name"]
-    restaurants.add_restaurant(name)
-    return redirect("/")
-
-@app.route("/remove")
+@app.route("/remove", methods=["GET", "POST"])
 def remove():
-    return render_template("remove.html")
-
-@app.route("/delete", methods=["POST"])
-def delete():
-    name = request.form["name"]
-    restaurants.delete_restaurant(name)
-    return redirect("/")
+    if request.method == "GET":
+        return render_template("remove.html")
+    if request.method == "POST":
+        name = request.form["name"]
+        restaurants.delete_restaurant(name)
+        return redirect("/")
 
 @app.route("/restaurants")
 def restaurants_list():
