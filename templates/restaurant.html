@@ -1,0 +1,32 @@
+<title>{{ restaurant }}</title>
+<h1>{{ restaurant }}</h1>
+<hr>
+<b>Aukioloajat:</b>
+<p>
+Maanantai: {{ times[1] }}
+<p>
+Tiistai: {{ times[2] }}
+<p>
+Keskiviikko: {{ times[3] }}
+<p>
+Torstai: {{ times[4] }}
+<p>
+Perjantai: {{ times[5] }}
+<p>
+Lauantai: {{ times[6] }}
+<p>
+Sunnuntai: {{ times[7] }}
+<p>
+<hr>
+<b>Ravintolan arvosana: {{ grade }}</b>
+<hr>
+<b>Arvostelut:</b>
+<p>
+{% for review in reviews %}
+Arvio: {{ review.grade }}/5
+<p>
+{{ review.message }}
+<p>
+{{ review.sent_at }}
+<hr>
+{% endfor %}

@@ -11,3 +11,9 @@ def get_grade(restaurant_id):
     average = result.fetchone()[0]
     return average
     
+def get_reviews(restaurant_id):
+    sql = "SELECT grade, message, sent_at FROM reviews WHERE restaurant_id=(:restaurant_id)"
+    result = db.session.execute(sql, {"restaurant_id":restaurant_id})
+    reviews = result.fetchall()
+    return reviews
+    

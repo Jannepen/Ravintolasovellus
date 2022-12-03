@@ -17,3 +17,15 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     password TEXT
 );
+
+CREATE TABLE servicetimes (
+    id SERIAL PRIMARY KEY,
+    monday TEXT,
+    tuesday TEXT,
+    wednesday TEXT,
+    thursday TEXT,
+    friday TEXT,
+    saturday TEXT,
+    sunday TEXT,
+    restaurant_id INTEGER REFERENCES restaurants ON DELETE CASCADE
+);

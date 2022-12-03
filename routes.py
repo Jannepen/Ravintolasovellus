@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, request
-import restaurants, reviews, users
+import restaurants, reviews, users, servicetimes
 
 @app.route("/")
 def index():
@@ -28,6 +28,14 @@ def remove():
 def restaurants_list():
     result = restaurants.get_list()
     return render_template("restaurants.html", restaurants=result)
+    
+@app.route("/restaurants/<string:name>")
+def restaurant(name):
+    restaurant_id = restaurants.get_id(name)
+    restaurant_grade = restaurants.get_grade(name)
+    restaurant_times = servicetimes.get_times(restaurant_id)
+    restaurant_reviews = reviews.get_reviews(restaurant_id)
+    return render_template("restaurant.html", restaurant=name, grade=restaurant_grade, times=restaurant_times, reviews = restaurant_reviews)
     
 @app.route("/review")
 def review():

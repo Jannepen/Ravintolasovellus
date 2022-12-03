@@ -28,3 +28,9 @@ def update_grade(restaurant_id):
     sql = "UPDATE restaurants SET grade=(:grade) WHERE id=(:restaurant_id)"
     result = db.session.execute(sql, {"grade":grade, "restaurant_id":restaurant_id})
     db.session.commit()
+    
+def get_grade(name):
+    sql = "SELECT grade FROM restaurants WHERE name=(:name)"
+    result = db.session.execute(sql, {"name":name})
+    restaurant_grade = result.fetchone().grade
+    return restaurant_grade
