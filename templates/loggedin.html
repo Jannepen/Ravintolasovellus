@@ -1,3 +1,9 @@
-Olet kirjautunut sisään käyttäjällä {{ message }}.
+{% extends "layout.html" %}
+{% block title %}Kirjautuminen onnistui{% endblock %}
+{% block content %}
+
+<b>Olet kirjautunut sisään käyttäjällä {{ message }}.</b>
 <p>
 Palaa <a href="/">etusivulle</a>
+
+{% endblock %}

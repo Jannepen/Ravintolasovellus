@@ -1,5 +1,10 @@
-<title>{{ restaurant }}</title>
-<h1>{{ restaurant }}</h1>
+{% extends "layout.html" %}
+{% block title %}{{ restaurant }}{% endblock %}
+{% block content %}
+
+<h2>{{ restaurant }}</h2>
+<hr>
+<b>Ravintolan arvosana: {{ grade }}</b>
 <hr>
 <b>Aukioloajat:</b>
 <p>
@@ -18,8 +23,6 @@ Lauantai: {{ times[6] }}
 Sunnuntai: {{ times[7] }}
 <p>
 <hr>
-<b>Ravintolan arvosana: {{ grade }}</b>
-<hr>
 <b>Arvostelut:</b>
 <p>
 {% for review in reviews %}
@@ -30,3 +33,5 @@ Arvio: {{ review.grade }}/5
 {{ review.sent_at }}
 <hr>
 {% endfor %}
+
+{% endblock %}

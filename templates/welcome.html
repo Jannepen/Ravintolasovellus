@@ -1,6 +1,8 @@
-<title>Ravintolasovellus</title>
-<h1>Ravintolasovellus</h1>
-Tervetuloa sovellukseen!
+{% extends "layout.html" %}
+{% block title %}Tervetuloa{% endblock %}
+{% block content %}
+
+<h2>Tervetuloa sovellukseen!</h2>
 <p>
 <a href="/new">Lisää ravintola</a>
 <p>
@@ -13,3 +15,5 @@ Tervetuloa sovellukseen!
 <a href="/login">Kirjautumissivulle</a>
 <p>
 <a href="/logout">Kirjaudu ulos</a>
+
+{% endblock %}

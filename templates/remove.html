@@ -1,5 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Poista ravintola{% endblock %}
+{% block content %}
+
+<h2>Poista ravintola</h2>
 <form action="remove" method="POST">
 <p>Ravintolan nimi:<br>
 <input type="text" name="name"></p>
 <input type="submit" value="Poista ravintola">
 </form>
+
+{% endblock %}
