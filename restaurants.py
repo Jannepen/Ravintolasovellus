@@ -6,6 +6,12 @@ def get_list():
     result = db.session.execute(sql)
     restaurants = result.fetchall()
     return restaurants
+    
+def get_gradedlist():
+    sql = "SELECT name FROM restaurants ORDER BY grade DESC"
+    result = db.session.execute(sql)
+    restaurants = result.fetchall()
+    return restaurants
 
 def add_restaurant(name):
     sql = "INSERT INTO restaurants (name) VALUES (:name)"

@@ -24,10 +24,14 @@ def remove():
         restaurants.delete_restaurant(name)
         return redirect("/")
 
-@app.route("/restaurants")
+@app.route("/restaurants", methods=["GET", "POST"])
 def restaurants_list():
-    result = restaurants.get_list()
-    return render_template("restaurants.html", restaurants=result)
+    if request.method == "GET":
+        result = restaurants.get_list()
+        return render_template("restaurants.html", restaurants=result)
+    if request.method == "POST":
+        result = restaurants.get_gradedlist()
+        return render_template("restaurants.html", restaurants=result)
     
 @app.route("/restaurants/<string:name>")
 def restaurant(name):

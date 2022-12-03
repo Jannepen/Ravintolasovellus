@@ -9,3 +9,7 @@
     document.write('<a href="' + link + '">{{ restaurant[0] }}</a>');
 </script>
 {% endfor %}
+
+<form action="/restaurants" method="POST">
+<input type="submit" value="Järjestä arvosanan mukaan">
+</form>
