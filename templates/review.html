@@ -3,13 +3,17 @@
 {% block content %}
 
 <h2>Arvostele ravintola</h2>
-<form action="/addreview" method="POST">
+<form action="/review" method="POST">
 <p>Arvosteltavan ravintolan nimi:<br>
-<input type="text" name="name">
+<select name="name">
+{% for restaurant in restaurants %}
+<option value="{{ restaurant[0] }}">{{ restaurant[0] }}
+{% endfor %}
+</select>
 <p>Arvosana:<br>
 <input type="radio" name="grade" value="1"> 1
 <input type="radio" name="grade" value="2"> 2
-<input type="radio" name="grade" value="3"> 3
+<input type="radio" name="grade" value="3" checked> 3
 <input type="radio" name="grade" value="4"> 4
 <input type="radio" name="grade" value="5"> 5
 <p>Kommentti:<br>
