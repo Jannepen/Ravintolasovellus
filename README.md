@@ -14,9 +14,19 @@ Sovelluksen toiminnallisuuksia:
 * Ylläpitäjä voi luoda ryhmiä (esim. pizzeriat), johon kuuluu ravintoloita. Yksi ravintola voi kuulua useampaan ryhmään.
 * Käyttäjä voi selata ryhmiä ja niihin kuuluvia ravintoloita.
 
-## Sovelluksen tilanne (20.11.2022)
+## Sovelluksen tilanne (4.12.2022)
 
-Sovellus on toiminnallisuuksiltaan vielä aika alkuvaiheessa. Sovelluksessa on mahdollista lisätä ja poistaa ravintoloita, sekä tarkkailla listaa ravintoloista. Sovellus ei ole vielä testattavissa tuotannossa, mutta alla ohjeita sovelluksen käyttöön ja sen testaamiseen.
+Sovellus ei vielä ole testattavissa tuotantopalvelimella, vaikka fly.io on alustettu versionhallintaan. Alla on ohjeet sovelluksen testaamiseen omalla koneella. 
+
+Sovelluksessa on nyt mahdollista lisätä, poistaa sekä arvostella ravintoloita. Lisätyt ravintolat näkyvät ravintolat-sivulla, ja ravintolaa painamalla pääsee kyseisen ravintolan sivulle, jossa näkyy tietoa ravintolasta sekä ravintolalle kirjoitetut arvostelut. Sovellukseen on myös mahdollista luoda käyttäjä ja kirjautua sisään/ulos, mutta sovelluksen käyttäminen onnistuu vielä ilman käyttäjän luomista.
+
+Seuraavia toiminnallisuuksia/kehityksen kohteita:
+
+* Sovelluksen toimintojen käyttäminen vaatii kirjautumisen sisään käyttäjänä tai ylläpitäjänä.
+* Ravintololle voi lisätä aukioloajat
+* Mahdollisuus etsiä ravintoloita nimen perusteella.
+* Ulkoasun parantaminen.
+* Sovelluksen vieminen tuotantopalvelimelle.
 
 ### Sovelluksen testaaminen
 
@@ -24,7 +34,7 @@ Sovellus on toiminnallisuuksiltaan vielä aika alkuvaiheessa. Sovelluksessa on m
    `git clone https://github.com/Jannepen/Ravintolasovellus.git`
    
 2. Mene sovelluksen repositorioon ja käynnistä pythonin virtuaaliympäristö komennoilla   
-   `python3 venv venv`   
+   `python3 -m venv venv`   
    `source venv/bin/activate`
 3. Lataa tarvittavat riippuvuudet komennolla   
    `pip install -r requirements.txt`
@@ -38,7 +48,9 @@ Sovellus on toiminnallisuuksiltaan vielä aika alkuvaiheessa. Sovelluksessa on m
    
 ### Käyttöohje
 
-Sovelluksen etusivulla on vaihtoehdot lisätä, poistaa tai selata ravintoloita.
-1. Lisääminen tapahtuu menemällä lisäämissivulle, antamalla nimi sekä painamalla "Lisää ravintola"
-2. Ravintoloita voi poistaa menemällä poistamissivulle, antamalla poistettavan ravintolan nimen ja painamalla "Poista ravintola"
-3. Painamalla "Selaa ravintoloita" pääsee sivulle, jossa on lista olemassa olevista ravintoloista. Mikäli ravintoloita ei ole lisätty, sivu näyttää tyhjältä.
+Sovelluksen toiminnallisuuksia:
+1. Ravintolan lisääminen tapahtuu menemällä lisäämissivulle, antamalla nimi sekä painamalla "Lisää ravintola"
+2. Ravintoloita voi poistaa menemällä poistamissivulle, ja valitsemalla poistettava ravintola
+3. Painamalla "Selaa ravintoloita" pääsee sivulle, jossa on lista olemassa olevista ravintoloista. Mikäli ravintoloita ei ole lisätty, sivu näyttää tyhjältä. Painamalla ravintolaa pääsee ravintolan omalle sivulle.
+4. Ravintolat-sivulla voi myös painaa "Järjestä arvosanan mukaan", jolloin ylhäällä ovat parhaiten arvostellut ravintolat
+5. Sovellukseen voi myös tehdä käyttäjän ja kirjautua sisään/ulos, mutta muiden toimintojen kannalta se ei ole pakollista.
