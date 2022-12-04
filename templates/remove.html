@@ -5,7 +5,12 @@
 <h2>Poista ravintola</h2>
 <form action="remove" method="POST">
 <p>Ravintolan nimi:<br>
-<input type="text" name="name"></p>
+<select name="name">
+{% for restaurant in restaurants %}
+<option value="{{ restaurant[0] }}">{{ restaurant[0] }}
+{% endfor %}
+</select>
+</p>
 <input type="submit" value="Poista ravintola">
 </form>
 

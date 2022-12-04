@@ -18,7 +18,8 @@ def new():
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
     if request.method == "GET":
-        return render_template("remove.html")
+        result = restaurants.get_list()
+        return render_template("remove.html", restaurants=result)
     if request.method == "POST":
         name = request.form["name"]
         restaurants.delete_restaurant(name)
