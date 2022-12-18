@@ -2,11 +2,18 @@
 {% block title %}Lisää ravintola{% endblock %}
 {% block content %}
 
+{% if session.username %}
+
 <h2>Lisää uusi ravintola</h2>
 <form action="/new" method="POST">
 <p>Ravintolan nimi:<br>
 <input type="text" name="name"></p>
 <input type="submit" value="Lisää ravintola">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+{% else %}
+<p>Kirjaudu sisään, jotta voit lisätä uuden ravintolan.</p>
+<a href="/login">Kirjautumissivulle</a>
+{% endif %}
 {% endblock %}

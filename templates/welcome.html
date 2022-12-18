@@ -11,9 +11,15 @@
 <a href="/restaurants">Selaa ravintoloita</a>
 <p>
 <a href="/review">Lisää arvostelu</a>
-<p>
-<a href="/login">Kirjautumissivulle</a>
-<p>
+<hr>
+{% if session.username %}
+<p>Olet kirjautunut sisään käyttäjällä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+<p>
+<a href="/register">Rekisteröidy</a>
+{% endif %}
+
 
 {% endblock %}

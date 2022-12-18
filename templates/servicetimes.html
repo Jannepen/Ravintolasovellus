@@ -2,6 +2,9 @@
 {% block title %}Lisää aukioloajat{% endblock %}
 {% block content %}
 
+{% if session.username %}
+
+
 <h2>Lisää aukioloajat</h2>
 <form action="servicetimes" method="POST">
 <p>
@@ -28,6 +31,11 @@ Lauantai: <input type="text" name="saturday">
 Sunnuntai: <input type="text" name="sunday">
 <p>
 <input type="submit" value="Lisää aukioloajat">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+{% else %}
+<p>Kirjaudu sisään, jotta voit lisätä aukioloajat.</p>
+<a href="/login">Kirjautumissivulle</a>
+{% endif %}
 {% endblock %}

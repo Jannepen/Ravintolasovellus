@@ -2,6 +2,9 @@
 {% block title %}Poista ravintola{% endblock %}
 {% block content %}
 
+{% if session.username %}
+
+
 <h2>Poista ravintola</h2>
 <form action="remove" method="POST">
 <p>Ravintolan nimi:<br>
@@ -12,6 +15,11 @@
 </select>
 </p>
 <input type="submit" value="Poista ravintola">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+{% else %}
+<p>Kirjaudu sisään, jotta voit poistaa ravintoloita.</p>
+<a href="/login">Kirjautumissivulle</a>
+{% endif %}
 {% endblock %}

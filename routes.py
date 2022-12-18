@@ -1,5 +1,5 @@
 from app import app
-from flask import redirect, render_template, request
+from flask import redirect, render_template, request, session
 import restaurants, reviews, users, servicetimes
 
 @app.route("/")
@@ -11,6 +11,8 @@ def new():
     if request.method == "GET":
         return render_template("new.html")
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Ravintolan lisääminen ei onnistunut.")
         name = request.form["name"]
         restaurants.add_restaurant(name)
         return redirect("/")
@@ -21,6 +23,8 @@ def remove():
         result = restaurants.get_list()
         return render_template("remove.html", restaurants=result)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Ravintolan poistaminen ei onnistunut.")
         name = request.form["name"]
         restaurants.delete_restaurant(name)
         return redirect("/")
@@ -48,6 +52,8 @@ def review():
         result = restaurants.get_list()
         return render_template("review.html", restaurants=result)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Arvostelun lähettäminen ei onnistunut.")
         restaurant_name = request.form["name"]
         restaurant_id = restaurants.get_id(restaurant_name)
         grade = request.form["grade"]
@@ -62,6 +68,8 @@ def addservicetimes():
         result = restaurants.get_list()
         return render_template("servicetimes.html", restaurants=result)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Aukioloaikojen lisääminen ei onnistunut.")
         restaurant_name = request.form["name"]
         restaurant_id = restaurants.get_id(restaurant_name)
         monday = request.form["monday"]

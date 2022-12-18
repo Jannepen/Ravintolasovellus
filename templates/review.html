@@ -2,6 +2,8 @@
 {% block title %}Arvostele ravintola{% endblock %}
 {% block content %}
 
+{% if session.username %}
+
 <h2>Arvostele ravintola</h2>
 <form action="/review" method="POST">
 <p>Arvosteltavan ravintolan nimi:<br>
@@ -21,6 +23,11 @@
 </textarea>
 <p>
 <input type="submit" value="Lähetä arvostelu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 
+{% else %}
+<p>Kirjaudu sisään, jotta voit kirjoittaa arvostelun.</p>
+<a href="/login">Kirjautumissivulle</a>
+{% endif %}
 {% endblock %}
