@@ -55,6 +55,24 @@ def review():
         reviews.add_review(grade, message, restaurant_id) 
         restaurants.update_grade(restaurant_id)
         return redirect("/")
+        
+@app.route("/servicetimes", methods=["GET", "POST"])
+def addservicetimes():
+    if request.method == "GET":
+        result = restaurants.get_list()
+        return render_template("servicetimes.html", restaurants=result)
+    if request.method == "POST":
+        restaurant_name = request.form["name"]
+        restaurant_id = restaurants.get_id(restaurant_name)
+        monday = request.form["monday"]
+        tuesday = request.form["tuesday"]
+        wednesday = request.form["wednesday"]
+        thursday = request.form["thursday"]
+        friday = request.form["friday"]
+        saturday = request.form["saturday"]
+        sunday = request.form["sunday"]
+        servicetimes.add_times(monday, tuesday, wednesday, thursday, friday, saturday, sunday, restaurant_id)
+        return redirect("/")
     
 @app.route("/login", methods=["GET", "POST"])
 def login():

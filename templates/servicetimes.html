@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Lisää aukioloajat{% endblock %}
+{% block content %}
+
+<h2>Lisää aukioloajat</h2>
+<form action="servicetimes" method="POST">
+<p>
+Ravintolan nimi:
+<p>
+<select name="name">
+{% for restaurant in restaurants %}
+<option value="{{ restaurant[0] }}">{{restaurant[0]}}
+{% endfor %}
+</select>
+<p>
+Maanantai: <input type="text" name="monday">
+<p>
+Tiistai: <input type="text" name="tuesday">
+<p>
+Keskiviikko: <input type="text" name="wednesday">
+<p>
+Torstai: <input type="text" name="thursday">
+<p>
+Perjantai: <input type="text" name="friday">
+<p>
+Lauantai: <input type="text" name="saturday">
+<p>
+Sunnuntai: <input type="text" name="sunday">
+<p>
+<input type="submit" value="Lisää aukioloajat">
+</form>
+
+{% endblock %}
