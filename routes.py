@@ -37,15 +37,16 @@ def restaurants_list():
     if request.method == "POST":
         result = restaurants.get_gradedlist()
         return render_template("restaurants.html", restaurants=result)
-    
+
 @app.route("/restaurants/<string:name>")
 def restaurant(name):
     restaurant_id = restaurants.get_id(name)
     restaurant_grade = restaurants.get_grade(name)
     restaurant_times = servicetimes.get_times(restaurant_id)
     restaurant_reviews = reviews.get_reviews(restaurant_id)
-    return render_template("restaurant.html", restaurant=name, grade=restaurant_grade, times=restaurant_times, reviews = restaurant_reviews)
-    
+    return render_template("restaurant.html", restaurant=name, grade=restaurant_grade,
+           times=restaurant_times, reviews = restaurant_reviews)
+
 @app.route("/review", methods=["GET", "POST"])
 def review():
     if request.method == "GET":
@@ -58,10 +59,10 @@ def review():
         restaurant_id = restaurants.get_id(restaurant_name)
         grade = request.form["grade"]
         message = request.form["message"]
-        reviews.add_review(grade, message, restaurant_id) 
+        reviews.add_review(grade, message, restaurant_id)
         restaurants.update_grade(restaurant_id)
         return redirect("/")
-        
+
 @app.route("/servicetimes", methods=["GET", "POST"])
 def addservicetimes():
     if request.method == "GET":
@@ -79,9 +80,10 @@ def addservicetimes():
         friday = request.form["friday"]
         saturday = request.form["saturday"]
         sunday = request.form["sunday"]
-        servicetimes.add_times(monday, tuesday, wednesday, thursday, friday, saturday, sunday, restaurant_id)
+        servicetimes.add_times(monday, tuesday, wednesday, thursday,
+        friday, saturday, sunday, restaurant_id)
         return redirect("/")
-    
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -93,7 +95,7 @@ def login():
             return render_template("loggedin.html", message=username)
         else:
             return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
-            
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -108,7 +110,7 @@ def register():
             return render_template("registered.html")
         else:
             return render_template("error.html", message="Rekisteröinti epäonnistui.")
-    
+
 @app.route("/logout")
 def logout():
     if users.user_id():
@@ -116,8 +118,3 @@ def logout():
     else:
         return render_template("error.html", message="Et ole kirjautunut sisään.")
     return render_template("logout.html")
-    
-    
-    
-    
-
