@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Ryhmät{% endblock %}
+{% block content %}
+
+{% if session.username %}
+
+<h2>Lisää ravintola ryhmään</h2>
+<form action="/addgroup" method="POST">
+<p>Ravintolan nimi:<br>
+<select name="name">
+{% for restaurant in restaurants %}
+<option value="{{ restaurant[0] }}">{{ restaurant[0] }}
+{% endfor %}
+</select>
+</p>
+<p>
+Ryhmän nimi:
+<input type="text" name="groupname">
+<p>
+<input type="submit" value="Lisää ryhmään">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% else %}
+<p>Kirjaudu sisään, jotta voit lisätä ravintolan ryhmään.</p>
+<a href="/login">Kirjautumissivulle</a>
+{% endif %}
+{% endblock %}

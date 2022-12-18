@@ -29,3 +29,9 @@ CREATE TABLE servicetimes (
     sunday TEXT,
     restaurant_id INTEGER REFERENCES restaurants ON DELETE CASCADE
 );
+
+CREATE TABLE groups (
+    id SERIAL PRIMARY KEY,
+    groupname TEXT,
+    restaurant_id INTEGER REFERENCES restaurants ON DELETE CASCADE
+);

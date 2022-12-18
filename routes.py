@@ -1,6 +1,6 @@
 from app import app
 from flask import redirect, render_template, request, session
-import restaurants, reviews, users, servicetimes
+import restaurants, reviews, users, servicetimes, groups
 
 @app.route("/")
 def index():
@@ -44,8 +44,9 @@ def restaurant(name):
     restaurant_grade = restaurants.get_grade(name)
     restaurant_times = servicetimes.get_times(restaurant_id)
     restaurant_reviews = reviews.get_reviews(restaurant_id)
+    restaurant_groups = groups.get_groups(restaurant_id)
     return render_template("restaurant.html", restaurant=name, grade=restaurant_grade,
-           times=restaurant_times, reviews = restaurant_reviews)
+           times=restaurant_times, reviews = restaurant_reviews, groups = restaurant_groups)
 
 @app.route("/review", methods=["GET", "POST"])
 def review():
@@ -82,6 +83,20 @@ def addservicetimes():
         sunday = request.form["sunday"]
         servicetimes.add_times(monday, tuesday, wednesday, thursday,
         friday, saturday, sunday, restaurant_id)
+        return redirect("/")
+
+@app.route("/addgroup", methods=["GET", "POST"])
+def addgroup():
+    if request.method == "GET":
+        result = restaurants.get_list()
+        return render_template("groups.html", restaurants=result)
+    if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Ryhmän lisääminen ei onnistunut")
+        restaurant_name = request.form["name"]
+        restaurant_id = restaurants.get_id(restaurant_name)
+        groupname = request.form["groupname"]
+        groups.add_group(restaurant_id, groupname)
         return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])

@@ -32,7 +32,13 @@ Arvio: {{ review.grade }}/5
 {{ review.message }}
 <p>
 {{ review.sent_at }}
+{% endfor %}
 <hr>
+Ravintola kuuluu ryhmiin:
+<p>
+{% for group in groups %}
+{{ group.groupname }}
+<p>
 {% endfor %}
 
 {% endblock %}
